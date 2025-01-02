@@ -1,0 +1,18 @@
+# virtualenv
+myenv
+
+*.log
+*.pot
+
+# Python cache
+__pycache__/
+*.
+
+# Dotenv settings
+.env
+
+# Django
+.my_pgpass
+.pg_service.conf
+gunicorn_config.py
+static/
