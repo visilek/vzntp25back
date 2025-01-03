@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     # MyModules
-    'authentication.apps.AuthConfig',
+    'authentication.apps.AuthenticationConfig',
 
 ]
 
