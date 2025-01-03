@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     'rest_framework',
     "corsheaders",
     # MyModules
-    'auth.apps.AuthConfig',
+    'authentication.apps.AuthConfig',
 
 ]
 
@@ -64,7 +64,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 # Authorizetion and authentication
-AUTH_USER_MODEL = "auth.CustomUser"
+AUTH_USER_MODEL = "authentication.CustomUser"
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
