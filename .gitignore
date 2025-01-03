@@ -6,13 +6,16 @@ myenv
 
 # Python cache
 __pycache__/
-*.
+*.pyc
 
-# Dotenv settings
+# Dotenv settings file
 .env
 
 # Django
+static/
+media/
+
+# Gunicorn
 .my_pgpass
 .pg_service.conf
 gunicorn_config.py
-static/
