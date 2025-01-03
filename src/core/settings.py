@@ -87,7 +87,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # CORS headers
 CORS_ALLOWED_ORIGINS = json.loads(os.getenv('DJANGO_CORS_ALLOWED_ORIGINS'))
-CORS_ALLOW_CREDENTIALS = str(os.getenv('JANGO_CORS_ALLOW_CREDENTIALS', 'False').lower()=='true')
+CORS_ALLOW_CREDENTIALS = os.getenv('JANGO_CORS_ALLOW_CREDENTIALS', 'False').lower()=='true'
 
 # CSRF protection
 CSRF_TRUSTED_ORIGINS = json.loads(os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS'))
