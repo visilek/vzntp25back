@@ -29,7 +29,7 @@ THIRD_PARTY_APPS = [
     "corsheaders",
 ]
 OWN_APPS = [
-    'authentication.apps.AuthenticationConfig',
+    'apps.authorisation',
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + OWN_APPS
@@ -67,8 +67,8 @@ DATABASES = {
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-# Authorizetion and authentication
-AUTH_USER_MODEL = "authentication.CustomUser"
+# Authorisation and authentication
+AUTH_USER_MODEL = "apps.authorisation.CustomUser"
 
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
