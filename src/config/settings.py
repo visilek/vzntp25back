@@ -14,31 +14,25 @@ DEBUG = str(os.getenv('DJANGO_DEBUG', 'False').lower() == 'true')
 
 ALLOWED_HOSTS = json.loads(os.getenv('DJANGO_ALLOWED_HOSTS'))
 
+
 # Application definition
-INSTALLED_APPS = [
-    # Django core
+DEFAULT_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # REST API
+]
+THIRD_PARTY_APPS = [
     'rest_framework',
     "corsheaders",
-    # MyModules
+]
+OWN_APPS = [
     'authentication.apps.AuthenticationConfig',
-
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
-    ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny',
-    ],
-}
+INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + OWN_APPS
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -51,9 +45,19 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny',
+    ],
+}
+
 ROOT_URLCONF = 'config.urls'
 
 WSGI_APPLICATION = 'config.wsgi.application'
+
 
 # Database settiongs
 DATABASES = {
@@ -85,9 +89,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
 # CORS headers
 CORS_ALLOWED_ORIGINS = json.loads(os.getenv('DJANGO_CORS_ALLOWED_ORIGINS'))
 CORS_ALLOW_CREDENTIALS = os.getenv('JANGO_CORS_ALLOW_CREDENTIALS', 'False').lower()=='true'
+
 
 # CSRF protection
 CSRF_TRUSTED_ORIGINS = json.loads(os.getenv('DJANGO_CSRF_TRUSTED_ORIGINS'))
@@ -95,6 +101,7 @@ CSRF_COOKIE_AGE = int(os.getenv('DJANGO_CSRF_COOKIE_AGE'))
 CSRF_COOKIE_SAMESITE = 'Lax' #SCRF policy (Strict / Lax / None)
 CSRF_USE_SESSIONS = False # Put scrf token into cookie not into session info
 CSRF_COOKIE_HTTPONLY = False # Put csrf token into cookie, not into html page code
+
 
 # Templates
 TEMPLATES = [
@@ -113,6 +120,7 @@ TEMPLATES = [
     },
 ]
 
+
 # Internationalization
 LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
@@ -126,6 +134,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     
 ]
+
 
 # Media storage
 MEDIA_URL = '/media/'
