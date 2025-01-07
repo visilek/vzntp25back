@@ -30,6 +30,7 @@ THIRD_PARTY_APPS = [
 ]
 OWN_APPS = [
     'apps.authorisation',
+    'apps.blog'
 ]
 
 INSTALLED_APPS = DEFAULT_APPS + THIRD_PARTY_APPS + OWN_APPS
