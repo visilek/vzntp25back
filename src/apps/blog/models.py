@@ -15,7 +15,7 @@ class Post(CreateTrackingModel, UpdateTrackingModel):
         "подзаголовок",
         max_length=255,
         blank=True)
-    text = models.TextField(
+    detailed = models.TextField(
         "текст записи",
         blank=True)
 
