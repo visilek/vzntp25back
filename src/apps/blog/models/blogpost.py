@@ -1,7 +1,7 @@
 from django.db import models
 from common.models import (CreateTrackingModel, UpdateTrackingModel)
 
-class Post(CreateTrackingModel, UpdateTrackingModel):
+class Blogpost(CreateTrackingModel, UpdateTrackingModel):
 
     class Meta:
         verbose_name = "пост"

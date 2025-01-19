@@ -1,0 +1,11 @@
+1.
+Как связаны сборка образа через docker build и docker compose up.
+Правильно ли, что если используется composer, собирать через docker build не надо,
+просто composer берёт Dockerfile в работу самостоятельно?
+
+2.
+Правильно ли, что если есть одна и таже переменная окружения в Dockerfile и в docker-compose,
+то просто переменная из docker-compose перебивает настройку в Dockerfile?
+
+3.
+Как работать 
