@@ -1,5 +1,11 @@
-version: "3"
+volumes:
+  pgdata:
+
+networks:
+  vznw:
+
 services:
+
   pgdb:
     image: postgres
     container_name: pgdb
@@ -14,6 +20,7 @@ services:
         - pgdata:/var/lib/postgresql/data
     networks:
       vznw:
+
   web:
     build:
       context: .
@@ -21,16 +28,6 @@ services:
     command: >
       sh -c "python3 manage.py migrate &&
              python3 manage.py runserver 0.0.0.0:8000"
-    environment:
-      DJANGO_SECRET_KEY: "django-insecure-n_=1=i#_(h4km0z26e!ifmwe^4=+h9!xj4nvv!7u(=e"
-      DJANGO_DEBUG: "True"
-      DJANGO_ALLOWED_HOSTS: "[\"*\"]"
-      DJANGO_DATABASES_DEFAULT_ENGINE: "django.db.backends.postgresql"
-      DJANGO_DATABASES_DEFAULT_HOST: pgdb
-      DJANGO_DATABASES_DEFAULT_PORT: "5432"
-      DJANGO_DATABASES_DEFAULT_NAME: vzntp25
-      DJANGO_DATABASES_DEFAULT_USER: vzntp
-      DJANGO_DATABASES_DEFAULT_PASSWORD: Qwerty123456
     ports:
       - "8001:8000"
     depends_on:
@@ -39,7 +36,3 @@ services:
       - pgdb:pgdb
     networks:
       vznw:
-volumes:
-  pgdata:
-networks:
-  vznw:

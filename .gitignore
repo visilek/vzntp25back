@@ -6,10 +6,12 @@ myenv
 
 # Python cache
 __pycache__/
-*.pyc
+*.py[cod]
 
 # Dotenv settings file
 .env
+
+.DS_Store
 
 # Django
 static/
