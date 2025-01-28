@@ -13,9 +13,9 @@ ENV DJANGO_DATABASES_DEFAULT_USER="vzntp"
 ENV DJANGO_DATABASES_DEFAULT_PASSWORD="Qwerty123456"
 
 WORKDIR /src
-COPY requirements .
+COPY requirements.txt .
 RUN pip install --upgrade pip
-RUN pip install -r ./requirements/_common.txt
+RUN pip install -r requirements.txt
 COPY . /src
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

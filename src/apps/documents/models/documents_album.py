@@ -1,11 +1,11 @@
 from django.db import models
 from common.models import (CreateTrackingModel, UpdateTrackingModel)
 
-class BlogRubric(CreateTrackingModel, UpdateTrackingModel):
+class DocumentsAlbum(CreateTrackingModel, UpdateTrackingModel):
 
     class Meta:
-        verbose_name = "рубрика блога"
-        verbose_name_plural = "рубрики блога"
+        verbose_name = "альбом документов"
+        verbose_name_plural = "альбомы документов"
 
     title = models.CharField(
         "название",
@@ -17,7 +17,7 @@ class BlogRubric(CreateTrackingModel, UpdateTrackingModel):
     cover_figure = models.ForeignKey(
         "figures.Figure",
         verbose_name="обложка",
-        related_name="blog_rubrics_covered",
+        related_name="documents_albums_covered",
         blank=True,
         null=True,
         on_delete=models.SET_NULL,

@@ -19,6 +19,18 @@ class Blogpost(CreateTrackingModel, UpdateTrackingModel):
         null=True,
         on_delete=models.SET_NULL,
     )
+    blogpost_tags = models.ManyToManyField(
+        "BlogpostTag",
+        verbose_name="тэги",
+        related_name="blogposts_tagged")
+    figures = models.ManyToManyField(
+        "figures.Figure",
+        verbose_name="иллюстрации",
+        related_name="blogposts_referring")
+    documents = models.ManyToManyField(
+        "documents.Document",
+        verbose_name="документы",
+        related_name="blogposts_referring")
 
     def __str__(self):
         return self.title
