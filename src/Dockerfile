@@ -17,5 +17,7 @@ COPY requirements.txt .
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 COPY . /src
+RUN mkdir /src/media
+RUN mkdir /src/static
 
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

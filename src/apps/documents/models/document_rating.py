@@ -21,4 +21,4 @@ class DocumentRating(CreateTrackingModel, UpdateTrackingModel):
     value = models.PositiveSmallIntegerField("Балл")
 
     def __str__(self):
-        return f"${self.document} - ${self.created_by}"
+        return f"{self.document} - {self.created_by}"

@@ -1,5 +1,7 @@
 volumes:
   pgdata:
+  media_volume:
+  static_volume:
 
 networks:
   vznw:
@@ -21,13 +23,16 @@ services:
     networks:
       vznw:
 
-  web:
+  django:
     build:
       context: .
-    container_name: web_app
+    container_name: django
     command: >
       sh -c "python3 manage.py migrate &&
              python3 manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - media_volume:/src/media
+      - static_volume:/src/static
     ports:
       - "8001:8000"
     depends_on:

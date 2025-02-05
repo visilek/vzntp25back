@@ -21,4 +21,4 @@ class BlogpostComment(CreateTrackingModel, UpdateTrackingModel):
     )
 
     def __str__(self):
-        return f"${self.blogpost} / ${self.created_by}"
+        return f"{self.blogpost} / {self.created_by}"

@@ -22,4 +22,4 @@ class FigureRating(CreateTrackingModel, UpdateTrackingModel):
     value = models.PositiveSmallIntegerField("Балл")
 
     def __str__(self):
-        return f"${self.figure} - ${self.created_by}"
+        return f"{self.figure} - {self.created_by}"

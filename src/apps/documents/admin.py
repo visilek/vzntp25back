@@ -21,8 +21,8 @@ admin.site.register(DocumentsAlbum, DocumentsAlbumAdmin)
 
 class DocumentAdmin(admin.ModelAdmin):
     list_display = [
-        "documents_album",
         "title",
+        "documents_album",
         "created_at",
     ]
     list_display_links = [

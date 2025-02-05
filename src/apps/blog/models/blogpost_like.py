@@ -17,4 +17,4 @@ class BlogpostLike(CreateTrackingModel):
     )
 
     def __str__(self):
-        return f"${self.blogpost} - ${self.created_by}"
+        return f"{self.blogpost} - {self.created_by}"
