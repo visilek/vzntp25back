@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models.CustomUser import CustomUser
+from .models.custom_user import CustomUser
 
 
 class CustomUserAdmin(UserAdmin):
