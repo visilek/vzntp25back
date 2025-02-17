@@ -5,6 +5,7 @@ from api.v1.blog.blogpost.querysets import BlogpostApiQueryset
 
 class Blogpost(CreateTrackingModel, UpdateTrackingModel):
 
+    objects = models.Manager()
     api_v1 = for_api = BlogpostApiQueryset.as_manager()
 
     class Meta:

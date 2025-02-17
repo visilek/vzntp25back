@@ -5,6 +5,7 @@ from api.v1.blog.blog_rubric.querysets import BlogRubricApiQueryset
 
 class BlogRubric(CreateTrackingModel, UpdateTrackingModel):
 
+    objects = models.Manager()
     api_v1 = BlogRubricApiQueryset.as_manager()
 
     class Meta:

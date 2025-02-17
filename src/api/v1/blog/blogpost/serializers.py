@@ -39,36 +39,36 @@ class BlogpostRetrieveSerializer(BlogpostBaseSerializer):
     updated_by = UpdatedByRelationBriefSerializer()
 
 
-# class BlogpostFormSerializer(serializers.Serializer):
+class BlogpostFormSerializer(serializers.Serializer):
 
-#     INSTANCE_MODEL = Blogpost
-#     INSTANCE_UPDATABLE_FIELDS = [
-#         "title",
-#         "subtitle",
-#         "detailed",
-#         "blog_rubric",
-#         "updated_at",
-#         "updated_by",
-#     ]
+    INSTANCE_MODEL = Blogpost
+    INSTANCE_UPDATABLE_FIELDS = [
+        "title",
+        "subtitle",
+        "detailed",
+        "blog_rubric",
+        "updated_at",
+        "updated_by",
+    ]
 
-#     title = serializers.CharField(max_length=127)
-#     subtitle = serializers.CharField(max_length=255, allow_blank=True)
-#     detailed = serializers.CharField(allow_blank=True)
-#     blog_rubric = serializers.PrimaryKeyRelatedField(queryset=BlogRubric.objects.all())
-#     created_at = serializers.DateTimeField()
-#     created_by = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
-#     updated_at = serializers.DateTimeField()
-#     updated_by = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    title = serializers.CharField(max_length=127)
+    subtitle = serializers.CharField(max_length=255, allow_blank=True)
+    detailed = serializers.CharField(allow_blank=True)
+    blog_rubric = serializers.PrimaryKeyRelatedField(queryset=BlogRubric.objects.all())
+    created_at = serializers.DateTimeField(required=False, read_only=True)
+    created_by = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
+    updated_at = serializers.DateTimeField(required=False, read_only=True)
+    updated_by = serializers.PrimaryKeyRelatedField(queryset=CustomUser.objects.all())
 
-#     def create(self, validated_data):
-#         return self.INSTANCE_MODEL.objects.create(**validated_data)
+    def create(self, validated_data):
+        return self.INSTANCE_MODEL.objects.create(**validated_data)
 
-#     def update(self, instance, validated_data):
-#         for attr_name in self.INSTANCE_UPDATABLE_FIELDS:
-#             setattr(
-#                 instance,
-#                 attr_name,
-#                 validated_data.get(attr_name, getattr(instance, attr_name)),
-#             )
-#         instance.save()
-#         return instance
+    def update(self, instance, validated_data):
+        for attr_name in self.INSTANCE_UPDATABLE_FIELDS:
+            setattr(
+                instance,
+                attr_name,
+                validated_data.get(attr_name, getattr(instance, attr_name)),
+            )
+        instance.save()
+        return instance

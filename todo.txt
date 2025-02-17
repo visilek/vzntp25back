@@ -1,7 +1,8 @@
 - Добавить create для Blogpost
-    - сделать BogpostFormSerializer
-    - сделать метод create в BlogpostApiViewset
-    - протестировать
+    + сделать BogpostFormSerializer
+    + сделать метод create в BlogpostApiViewset
+    + протестировать
+    - попробовать вынести поля в миксины
 - Добавить update для blogpost
     - доработать BogpostFormSerializer
     - сделать метод update в BlogpostApiViewset
