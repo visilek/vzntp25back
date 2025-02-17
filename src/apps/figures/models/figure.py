@@ -8,6 +8,8 @@ from common.storage import (
 
 class Figure(CreateTrackingModel, UpdateTrackingModel):
 
+    objects = models.Manager()
+    
     class Meta:
         verbose_name = "иллюстрация"
         verbose_name_plural = "иллюстрации"

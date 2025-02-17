@@ -1,21 +1,23 @@
-- Добавить create для Blogpost
++ Добавить create для Blogpost
     + сделать BogpostFormSerializer
     + сделать метод create в BlogpostApiViewset
     + протестировать
-    - попробовать вынести поля в миксины
-- Добавить update для blogpost
-    - доработать BogpostFormSerializer
-    - сделать метод update в BlogpostApiViewset
-    - протестировать
-- Добавить create и updated для BlogRubric
-    - сделать BlogRubricFormSerializer
-    - добавить методы create и update в BlogRubricApiVieset
-    - протестировать
+    + попробовать вынести поля в миксины
++ Добавить update для blogpost
+    + доработать BogpostFormSerializer
+    + сделать метод update в BlogpostApiViewset
+    + протестировать
++ Добавить create и updated для BlogRubric
+    + сделать BlogRubricFormSerializer
+    + добавить методы create и update в BlogRubricApiVieset
+    + протестировать
 - Добавить create и updated для BlogpostTag
     - сделать BlogpostTagFormSerializer
     - добавить методы create и update в BlogpostTagApiVieset
     - - протестировать
-- Унифицировать методы для выделения в базовый класс
++ Унифицировать методы для выделения в базовый класс
++ Отредактировать метод BlogpostApiQueryset.by_tags() для работы с множественными значениями
+- Обернуть все фильтры в querysets в try/except
 
 
 УЛУЧШЕНИЯ ВТОРОЙ ОЧЕРЕДИ:

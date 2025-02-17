@@ -12,39 +12,36 @@ from http import HTTPMethod
 
 # Own modules imports
 from apps.blog.models import Blogpost
-from .querysets import BlogpostApiQueryset
 from .serializers import (
     BlogpostListSerializer,
-    BlogpostRetrieveSerializer,
+    BlogpostRetrievedSerializer,
     BlogpostFormSerializer,
 )
 
 
 class BlogpostViewset(ViewSet):
 
-    API_QS = Blogpost.api_v1
-    INSTANCE_LIST_SERIALIZER = BlogpostListSerializer
-    INSTANCE_RETRIEVE_SERIALIZER = BlogpostRetrieveSerializer
-    INSTANCE_FORM_SERIALIZER = BlogpostFormSerializer
+    model_manager = Blogpost.api_v1
 
-    LIST_FILTERS = [
+    instance_list_serializer = BlogpostListSerializer
+    instance_retrieved_serializer = BlogpostRetrievedSerializer
+    instance_form_serializer = BlogpostFormSerializer
+
+    allowed_list_filter_keys = [
         "blog_rubric",
         "blogpost_tags",
     ]
 
-    def get_object(self, pk):
-        qs = self.API_QS.as_detailed()
-        obj = get_object_or_404(qs, pk=pk)
-        return obj
-
     def list(self, request):
-        qs = self.API_QS.as_list().filter_by_request(request, self.LIST_FILTERS)
-        serializer = self.INSTANCE_LIST_SERIALIZER(qs, many=True)
+        qs = self.model_manager.as_list().filter_by_request(
+            request, self.allowed_list_filter_keys
+        )
+        serializer = self.instance_list_serializer(qs, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
-        obj = self.get_object(pk)
-        serializer = self.INSTANCE_RETRIEVE_SERIALIZER(obj)
+        obj = get_object_or_404(self.model_manager.as_retrieved(), pk=pk)
+        serializer = self.instance_retrieved_serializer(obj)
         return Response(serializer.data)
 
     def create(self, request):
@@ -52,7 +49,7 @@ class BlogpostViewset(ViewSet):
             # ЗАМЕНИТЬ НА ВЫБОР ПОЛЬЗОВАТЕЛЯ ИЗ ПАРАМЕТРОВ ЗАПРОСА!!!
             author = 1
             data = request.data | {"created_by": author, "updated_by": author}
-            request_serializer = self.INSTANCE_FORM_SERIALIZER(data=data)
+            request_serializer = self.instance_form_serializer(data=data)
             if request_serializer.is_valid():
                 request_serializer.save()
                 return Response(request_serializer.data, status=status.HTTP_201_CREATED)
@@ -63,4 +60,38 @@ class BlogpostViewset(ViewSet):
                 )
         except Exception as e:
             print("Exception on blogpost create:", e)
+            return Response(str(e), status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    def update(self, request, pk=None):
+        try:
+            # ЗАМЕНИТЬ НА ПОДСТАНОВКУ ПОЛЬЗОВАТЕЛЯ ИЗ ЗАПРОСА request.user!!!
+            author = 1
+            obj = get_object_or_404(self.model_manager.all(), pk=pk)
+            data = request.data | {
+                "created_by": obj.created_by.pk,
+                "updated_by": author,
+            }
+            request_serializer = self.instance_form_serializer(obj, data=data)
+            if request_serializer.is_valid():
+                request_serializer.save()
+                return Response(request_serializer.data, status=status.HTTP_200_OK)
+            else:
+                print("invalid serializer", request_serializer.errors)
+                return Response(
+                    request_serializer.errors,
+                    status=status.HTTP_422_UNPROCESSABLE_ENTITY,
+                )
+        except Exception as e:
+            print("Exception on blogpost update:", e)
+            return Response(str(e), status=status.HTTP_406_NOT_ACCEPTABLE)
+
+    def destroy(self, request, pk=None):
+        try:
+            obj = get_object_or_404(self.model_manager.all(), pk=pk)
+            result = obj.delete()
+            return Response(
+                f"Blogposts deleted: {result}", status=status.HTTP_204_NO_CONTENT
+            )
+        except Exception as e:
+            print("Exception on blogpost delete:", e)
             return Response(str(e), status=status.HTTP_406_NOT_ACCEPTABLE)

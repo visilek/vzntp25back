@@ -1,22 +1,19 @@
 from rest_framework import serializers
-from common.api.serializers import (
-    CreatedByRelationBriefSerializer,
-    UpdatedByRelationBriefSerializer,
-)
+from common.api import serializers as commons
 
 
-class BlogpostTagBaseSerializer(serializers.Serializer):
-    id = serializers.IntegerField()
-    title = serializers.CharField()
-    created_at = serializers.DateTimeField()
-    created_by = CreatedByRelationBriefSerializer()
+class BlogpostTagBaseSerializer(
+    commons.WithCreatedSerializerMixin, serializers.Serializer
+):
+    id = serializers.ReadOnlyField()
+    title = serializers.ReadOnlyField()
 
 
 class BlogpostTagListSerializer(BlogpostTagBaseSerializer):
-    blogposts_tagged_count = serializers.IntegerField()
+    blogposts_tagged_count = serializers.ReadOnlyField()
 
 
-class BlogpostTagRetrieveSerializer(BlogpostTagBaseSerializer):
-    detailed = serializers.CharField()
-    updated_at = serializers.DateTimeField()
-    updated_by = UpdatedByRelationBriefSerializer()
+class BlogpostTagRetrievedSerializer(
+    commons.WithUpdatedSerializerMixin, BlogpostTagBaseSerializer
+):
+    detailed = serializers.ReadOnlyField()

@@ -20,7 +20,7 @@ class BlogpostApiQueryset(
     def as_list(self):
         return self.as_base().with_blogpost_comments_count().with_figures_count()
 
-    def as_detailed(self):
+    def as_retrieved(self):
         return self.as_base().with_updated_by_brief_data()
 
     def with_blog_rubric_brief_data(self):
@@ -45,7 +45,9 @@ class BlogpostApiQueryset(
         )
 
     def by_blogpost_tags(self, options):
-        return self.filter(blogpost_tags=options)
+        options = [int(option) for option in str(options).split()]
+        print("Blogpost filter by tags options:", options)
+        return self.filter(blogpost_tags__in=options)
 
     def by_blog_rubric(self, options):
         return self.filter(blog_rubric=options[0])

@@ -12,28 +12,32 @@ from http import HTTPMethod
 from apps.blog.models import BlogpostTag
 from .serializers import (
     BlogpostTagListSerializer,
-    BlogpostTagRetrieveSerializer,
+    BlogpostTagRetrievedSerializer,
 )
 
 
 class BlogpostTagViewset(ViewSet):
 
-    API_QS = BlogpostTag.api_v1
-    INSTANCE_LIST_SERIALIZER = BlogpostTagListSerializer
-    INSTANCE_RETRIEVE_SERIALIZER = BlogpostTagRetrieveSerializer
-    LIST_FILTERS = []
+    model_manager = BlogpostTag.api_v1
+
+    instance_list_serializer = BlogpostTagListSerializer
+    instance_retrieved_serializer = BlogpostTagRetrievedSerializer
+
+    allowed_list_filter_keys = []
 
     def get_object(self, pk):
-        qs = self.API_QS.as_detailed()
+        qs = self.model_manager.as_retrieved()
         obj = get_object_or_404(qs, pk=pk)
         return obj
 
     def list(self, request):
-        qs = self.API_QS.as_list().filter_by_request(request, self.LIST_FILTERS)
-        serializer = self.INSTANCE_LIST_SERIALIZER(qs, many=True)
+        qs = self.model_manager.as_list().filter_by_request(
+            request, self.allowed_list_filter_keys
+        )
+        serializer = self.instance_list_serializer(qs, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk=None):
         obj = self.get_object(pk)
-        serializer = self.INSTANCE_RETRIEVE_SERIALIZER(obj)
+        serializer = self.instance_retrieved_serializer(obj)
         return Response(serializer.data)

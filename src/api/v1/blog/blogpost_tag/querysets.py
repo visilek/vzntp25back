@@ -15,7 +15,7 @@ class BlogpostTagApiQueryset(
     def as_list(self):
         return self.as_base().defer("detailed").with_blogposts_tagged_count()
 
-    def as_detailed(self):
+    def as_retrieved(self):
         return self.as_base().with_updated_by_brief_data()
 
     def with_blogposts_tagged_count(self):
