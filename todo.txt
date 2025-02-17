@@ -1,16 +1,26 @@
-- OK Добавить загружаемые файлы к модели documents.Document:
-    - OK подключить volume для папок media и static
-    - OK отредактировать модель
-    - OK добавить обработку сигнала на УДАЛЕНИЕ файла при удалени записи
-    - OK сделать имя поля для загружаемого файла настраиваемым
-    - OK добавить обработку сигнала на ЗАМЕНУ старого файла при обновлении записи (если загружен новый)
-    - OK проверить, работает ли удаление, если в админке просто зачистили старый файл.
-- OK По аналогии добавить загружаемые файлы к модели figures.Figure
-    - OK добавить поле file
-    - OK добавить attachment_field_name = "file"
-    - OK создать миграции,
-    - OK протестировать создание новой модели с прикреплённым файлом
-    - OK подключить обработку сигнала на УДАЛЕНИЕ модели
-    - OK протестировать удаление
-    - OK подключить обработку сигнала на ОБНОВЛЕНИЕ модели
-    - OK протестировать изменение
+- Добавить create для Blogpost
+    - сделать BogpostFormSerializer
+    - сделать метод create в BlogpostApiViewset
+    - протестировать
+- Добавить update для blogpost
+    - доработать BogpostFormSerializer
+    - сделать метод update в BlogpostApiViewset
+    - протестировать
+- Добавить create и updated для BlogRubric
+    - сделать BlogRubricFormSerializer
+    - добавить методы create и update в BlogRubricApiVieset
+    - протестировать
+- Добавить create и updated для BlogpostTag
+    - сделать BlogpostTagFormSerializer
+    - добавить методы create и update в BlogpostTagApiVieset
+    - - протестировать
+- Унифицировать методы для выделения в базовый класс
+
+
+УЛУЧШЕНИЯ ВТОРОЙ ОЧЕРЕДИ:
+=========================
+- Уточнить запросы prefetch_related через .defer() или .only(), чтобы уменьшить объём выборки:
+    Например, в методе BlogpostApiQueryset.with_blogpost_tags_prefetched - .only("id", "title")
+    (!) prefetch_related можно управлять через объект Prefetch
+    (https://docs.djangoproject.com/en/5.1/ref/models/querysets/#prefetch-objects)
+    

@@ -1,8 +1,11 @@
 from django.db import models
 from common.models import CreateTrackingModel, UpdateTrackingModel
+from api.v1.blog.blogpost_tag.querysets import BlogpostTagApiQueryset
 
 
 class BlogpostTag(CreateTrackingModel, UpdateTrackingModel):
+
+    api_v1 = BlogpostTagApiQueryset.as_manager()
 
     class Meta:
         verbose_name = "тэг блога"
