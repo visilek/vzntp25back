@@ -6,14 +6,16 @@ from common.storage import (
     pre_save_attachment_update_handler,
 )
 
+from api.v1.documents.document.querysets import DocumentApiQueryset
 
 class Document(CreateTrackingModel, UpdateTrackingModel):
+
+    objects = models.Manager()
+    api_v1 = DocumentApiQueryset.as_manager()
 
     class Meta:
         verbose_name = "документ"
         verbose_name_plural = "документы"
-
-    attachment_field_name = "file"
 
     title = models.CharField("название", max_length=127, blank=False)
     detailed = models.TextField("описание", blank=True)
@@ -35,13 +37,13 @@ class Document(CreateTrackingModel, UpdateTrackingModel):
 
 
 models.signals.post_delete.connect(
-    post_delete_attachment_delete_handler,
+    post_delete_attachment_delete_handler("file"),
     sender=Document,
     dispatch_uid="documents__document__post_delete__attachment_delete",
 )
 
 models.signals.pre_save.connect(
-    pre_save_attachment_update_handler,
+    pre_save_attachment_update_handler("file"),
     sender=Document,
     dispatch_uid="documents__document__pre_save__attachment_update",
 )

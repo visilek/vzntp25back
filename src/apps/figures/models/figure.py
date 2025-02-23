@@ -1,28 +1,22 @@
 from django.db import models
-from common.models import (CreateTrackingModel, UpdateTrackingModel)
+from common.models import CreateTrackingModel, UpdateTrackingModel
 from common.storage import (
     uploading_path_getter,
     post_delete_attachment_delete_handler,
     pre_save_attachment_update_handler,
 )
 
+
 class Figure(CreateTrackingModel, UpdateTrackingModel):
 
     objects = models.Manager()
-    
+
     class Meta:
         verbose_name = "иллюстрация"
         verbose_name_plural = "иллюстрации"
 
-    attachment_field_name = "file"
-
-    title = models.CharField(
-        "название",
-        max_length=127,
-        blank=False)
-    detailed = models.TextField(
-        "описание",
-        blank=True)
+    title = models.CharField("название", max_length=127, blank=False)
+    detailed = models.TextField("описание", blank=True)
     figures_album = models.ForeignKey(
         "FiguresAlbum",
         verbose_name="альбом",
@@ -41,13 +35,13 @@ class Figure(CreateTrackingModel, UpdateTrackingModel):
 
 
 models.signals.post_delete.connect(
-    post_delete_attachment_delete_handler,
+    post_delete_attachment_delete_handler("file"),
     sender=Figure,
     dispatch_uid="figures__figure__post_delete__attachment_delete",
 )
 
 models.signals.pre_save.connect(
-    pre_save_attachment_update_handler,
+    pre_save_attachment_update_handler("file"),
     sender=Figure,
     dispatch_uid="figures__figure__pre_save__attachment_update",
 )

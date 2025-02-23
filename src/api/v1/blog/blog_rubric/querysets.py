@@ -3,10 +3,10 @@ from common.api import querysets as commons
 
 
 class BlogRubricApiQueryset(
-    QuerySet,
     commons.FilterableByRequestMixin,
     commons.WithCreatedByBriefDataMixin,
     commons.WithUpdatedByBriefDataMixin,
+    QuerySet,
 ):
 
     def as_base(self):
