@@ -16,9 +16,11 @@ class WithCreatedSerializerMixin(metaclass=serializers.SerializerMetaclass):
     created_at = serializers.ReadOnlyField()
     created_by = CreatedByRelationBriefSerializer()
 
+
 class WithUpdatedSerializerMixin(metaclass=serializers.SerializerMetaclass):
     updated_at = serializers.ReadOnlyField()
     updated_by = CreatedByRelationBriefSerializer()
+
 
 class WithCreatedFormSerializerMixin(metaclass=serializers.SerializerMetaclass):
     created_at = serializers.DateTimeField(required=False, read_only=True)

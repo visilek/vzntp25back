@@ -1,3 +1,3 @@
 from .uploading_path import uploading_path_getter
 
-from .attachment_handlers import post_delete_attachment_delete_handler, pre_save_attachment_update_handler
+from .attachment_handlers import get_on_post_delete_attachment_handler, get_on_pre_save_attachment_handler

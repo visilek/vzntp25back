@@ -1,14 +1,14 @@
 import os
 
 
-def post_delete_attachment_delete_handler(fieldname):
+def get_on_post_delete_attachment_handler(attachment_fieldname):
     def handler(sender, instance, **kwargs):
         """
         Signal reciever for deleting attached file
         after deleting the model instance itself
         """
 
-        if attachment := getattr(instance, fieldname):
+        if attachment := getattr(instance, attachment_fieldname):
             if os.path.isfile(attachment.path):
                 # Delete the file
                 os.remove(attachment.path)
@@ -21,7 +21,7 @@ def post_delete_attachment_delete_handler(fieldname):
     return handler
 
 
-def pre_save_attachment_update_handler(fieldname):
+def get_on_pre_save_attachment_handler(attachment_fieldname):
 
     def handler(sender, instance, **kwargs):
         """
@@ -33,7 +33,7 @@ def pre_save_attachment_update_handler(fieldname):
             return
 
         try:
-            old_attachment = getattr(sender.objects.get(pk=instance.pk), fieldname)
+            old_attachment = getattr(sender.objects.get(pk=instance.pk), attachment_fieldname)
             old_attachment_path = old_attachment.path
         except Exception as e:
             print(e)

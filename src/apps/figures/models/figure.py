@@ -2,8 +2,8 @@ from django.db import models
 from common.models import CreateTrackingModel, UpdateTrackingModel
 from common.storage import (
     uploading_path_getter,
-    post_delete_attachment_delete_handler,
-    pre_save_attachment_update_handler,
+    get_on_post_delete_attachment_handler,
+    get_on_pre_save_attachment_handler,
 )
 
 
@@ -34,14 +34,20 @@ class Figure(CreateTrackingModel, UpdateTrackingModel):
         return self.title
 
 
+on_post_delete_file_handler = get_on_post_delete_attachment_handler(
+    attachment_fieldname="file"
+)
 models.signals.post_delete.connect(
-    post_delete_attachment_delete_handler("file"),
+    receiver=on_post_delete_file_handler,
     sender=Figure,
-    dispatch_uid="figures__figure__post_delete__attachment_delete",
+    dispatch_uid="figures__figure__post_delete__file_delete",
 )
 
+on_pre_save_file_handler = get_on_pre_save_attachment_handler(
+    attachment_fieldname="file"
+)
 models.signals.pre_save.connect(
-    pre_save_attachment_update_handler("file"),
+    receiver=on_pre_save_file_handler,
     sender=Figure,
-    dispatch_uid="figures__figure__pre_save__attachment_update",
+    dispatch_uid="figures__figure__pre_save__file_update",
 )

@@ -2,9 +2,9 @@ class FilterableByRequestMixin:
     def parse_multiple_options_string(self, options_string):
         return [int(option) for option in str(options_string).split()]
 
-    def filter_by_request(self, request, allowed_filter_keys):
+    def filter_by_request(self, request, filter_keys=[]):
         for key, value in request.GET.items():
-            if key in allowed_filter_keys:
+            if key in filter_keys:
                 try:
                     self = getattr(self, f"by_{key}")(value)
                 except NotImplementedError as e:

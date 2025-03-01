@@ -58,13 +58,13 @@ class DocumentFormSerializer(
     def create(self, validated_data):
         return self.INSTANCE_MODEL.objects.create(**validated_data)
 
-    def update(self, instance, validated_data):
-        for attr_name in self.INSTANCE_UPDATABLE_FIELDS:
-            setattr(
-                instance,
-                attr_name,
-                validated_data.get(attr_name, getattr(instance, attr_name)),
-            )
+    # def update(self, instance, validated_data):
+    #     for attr_name in self.INSTANCE_UPDATABLE_FIELDS:
+    #         setattr(
+    #             instance,
+    #             attr_name,
+    #             validated_data.get(attr_name, getattr(instance, attr_name)),
+    #         )
 
-        instance.save()
-        return instance
+    #     instance.save()
+    #     return instance

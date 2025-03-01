@@ -29,7 +29,8 @@ class BlogRubricViewset(ViewSet):
 
     def list(self, request):
         qs = self.model_manager.as_list().filter_by_request(
-            request, self.allowed_list_filter_keys
+            request,
+            filter_keys=self.allowed_list_filter_keys,
         )
         serializer = self.instance_list_serializer(qs, many=True)
         return Response(serializer.data)
