@@ -16,7 +16,7 @@ from .serializers import (
     DocumentRetrievedSerializer,
     DocumentFormSerializer,
 )
-from common.storage.uploading_path import uploading_path_getter as get_path
+from common.storage import uploading_path
 
 
 class DocumentViewset(ViewSet):
@@ -67,7 +67,7 @@ class DocumentViewset(ViewSet):
     #         if request_serializer.is_valid():
     #             uploaded_file = serializer.validated_data["file"]
 
-    #             save_path = get_path(
+    #             save_path = uploading_path.get_path(
     #                 instance=None,
     #                 filename=uploaded_file.name,
     #                 app_name="documents",

@@ -1,5 +1,5 @@
 from django.db import models
-from common.models import CreateTrackingModel
+from common.models.base import CreateTrackingModel
 
 
 class BlogpostLike(CreateTrackingModel):

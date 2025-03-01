@@ -1,5 +1,5 @@
 from django.db import models
-from common.models import CreateTrackingModel, UpdateTrackingModel
+from common.models.base import CreateTrackingModel, UpdateTrackingModel
 from api.v1.blog.blogpost_tag.querysets import BlogpostTagApiQueryset
 
 

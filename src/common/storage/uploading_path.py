@@ -2,7 +2,7 @@ import uuid
 import datetime
 
 
-def uploading_path_getter(instance, filename, app_name=None, model_name=None):
+def get_path(instance, filename, app_name=None, model_name=None):
     """
     Callback for generating 'upload_to' option
 

@@ -1,5 +1,5 @@
 from django.db import models
-from common.models import CreateTrackingModel, UpdateTrackingModel
+from common.models.base import CreateTrackingModel, UpdateTrackingModel
 
 
 class FigureRating(CreateTrackingModel, UpdateTrackingModel):

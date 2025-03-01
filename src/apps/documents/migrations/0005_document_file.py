@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='document',
             name='file',
-            field=models.ImageField(blank=True, null=True, upload_to=common.storage.uploading_path_getter, verbose_name='файл'),
+            field=models.ImageField(blank=True, null=True, upload_to=common.storage.uploading_path.get_path, verbose_name='файл'),
         ),
     ]
